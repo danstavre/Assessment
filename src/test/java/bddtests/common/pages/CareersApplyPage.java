@@ -81,4 +81,8 @@ public class CareersApplyPage {
     public void pressSubmitButton() {
         submitButton.click();
     }
+
+    public boolean verifyCustomerIsOnCareerApplyPage(){
+       return submitButton.isDisplayed();
+    }
 }

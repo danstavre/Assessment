@@ -9,9 +9,6 @@ import org.openqa.selenium.WebElement;
 @DefaultUrl("https://hexad.de/en/careers.html")
 public class CareersPage extends PageObject {
 
-    @FindBy(xpath = "//*[@id='email']")
-    private WebElement homeLogo;
-
     @FindBy(xpath = "//*[@id=\"inner-content\"]/div/div[2]/div[3]/button[1]")
     private WebElement careerApplyButton;
 

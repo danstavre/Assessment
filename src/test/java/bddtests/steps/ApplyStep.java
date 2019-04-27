@@ -4,20 +4,22 @@ import bddtests.common.pages.CareersPage;
 import bddtests.common.pages.MainPage;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import static bddtests.common.DriverSetUp.getDriver;
 
 public class ApplyStep {
 
     private static final String URL = "https://hexad.de/home.html";
 
+    WebDriver driver;
+
+    public CareersPage careersPage;
+
     public MainPage mainPage;
 
     @Step("Open main page")
     public void openHexadMainPage() {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.navigate().to(URL);
-        mainPage = new MainPage(driver);
+        mainPage = new MainPage(getDriver());
         mainPage.openMainPage(URL);
     }
 
@@ -28,6 +30,16 @@ public class ApplyStep {
 
     @Step("Click on careers link")
     public void clickOnCareerLink() {
+        mainPage.pressMyCareerLink();
+    }
+
+    @Step
+    public boolean verifyCareersPageIsOpen(){
+        return careersPage.verifyCareersApplyButtonIsPresent();
+    }
+
+    @Step("Click on apply button")
+    public void clickOnApplyButton() {
         mainPage.pressMyCareerLink();
     }
 }

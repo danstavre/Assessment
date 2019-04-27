@@ -4,6 +4,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
 @DefaultUrl("https://hexad.de/en/home.html")
 public class MainPage {
@@ -12,16 +13,17 @@ public class MainPage {
 
     public MainPage(WebDriver webDriver) {
         this.webDriver = webDriver;
+        PageFactory.initElements(webDriver, this);
     }
 
-    @FindBy(xpath = "//*[@id=\"main_navigation_menu\"]/li[6]/a")
-    private WebElement myCareerLink;
+    @FindBy(id = "header")
+    private WebElement header;
 
-    @FindBy(xpath = "//*[@id=\"header\"]/nav/div/div[1]/a")
-    private WebElement homePageLogo;
+    @FindBy(tagName ="li")
+    private WebElement careerLink;
 
     public boolean verifyIfMainPageOpened() {
-        return homePageLogo.isDisplayed();
+        return header.isDisplayed();
     }
 
     public void openMainPage(String URL) {
@@ -29,6 +31,6 @@ public class MainPage {
     }
 
     public void pressMyCareerLink() {
-        myCareerLink.click();
+        careerLink.click();
     }
 }

@@ -1,11 +1,11 @@
 package bddtests.common;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.jbehave.core.annotations.AfterStories;
+import org.jbehave.core.annotations.BeforeStories;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class DriverSetUp extends ConfigurationProperties {
+public class DriverSetUp {
 
     static WebDriver driver;
 
@@ -13,29 +13,28 @@ public class DriverSetUp extends ConfigurationProperties {
         return driver;
     }
 
-    private static WebDriver initChromeDriver(String url) {
-        System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
+    private static WebDriver initChromeDriver() {
+        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.navigate().to(url);
         return driver;
     }
 
-    public static void setDriver(String url) {
-        driver = initChromeDriver(url);
+    public static void setDriver() {
+        driver = initChromeDriver();
     }
 
-    @BeforeClass
-    public static void initializeTestBaseSetup() {
+    @BeforeStories
+    public void initializeTestBaseSetup() {
         try {
-            setDriver(CHROME_DRIVER_PATH);
+            setDriver();
         } catch (Exception e) {
             System.out.println("Error" + e.getStackTrace());
         }
     }
 
-    @AfterClass
-    public static void tearDown() {
+    @AfterStories
+    public void tearDown() {
         System.out.println("Closing browser. ");
         getDriver().manage().deleteAllCookies();
         getDriver().quit();
