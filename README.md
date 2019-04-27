@@ -1,6 +1,5 @@
 # selenium-tests
-==============================================================================
-Automated tests for https://hexad.de page
+Automated tests
 
 # Prerequisites
 java 10; Maven; JBehave
