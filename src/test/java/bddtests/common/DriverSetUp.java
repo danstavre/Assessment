@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DriverSetUp {
 
-    static WebDriver driver;
+    private static WebDriver driver;
 
     public static WebDriver getDriver() {
         return driver;
@@ -16,11 +16,10 @@ public class DriverSetUp {
     private static WebDriver initChromeDriver() {
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
         return driver;
     }
 
-    public static void setDriver() {
+    private static void setDriver() {
         driver = initChromeDriver();
     }
 
@@ -29,7 +28,7 @@ public class DriverSetUp {
         try {
             setDriver();
         } catch (Exception e) {
-            System.out.println("Error" + e.getStackTrace());
+            System.out.println(e);
         }
     }
 

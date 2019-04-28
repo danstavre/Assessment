@@ -46,7 +46,7 @@ public class ApplyStepDefinitions extends SerenityStories {
 
     @Then("Customer is redirected to an 'Careers Apply' page")
     public void verifyCustomerIsOnProperPage(){
-        assertTrue("Careers Apply page is not opened",careersApplyPage.verifyCustomerIsOnCareerApplyPage());
+        assertTrue("Careers Apply page is not opened", careersApplyPage.verifyCustomerIsOnCareerApplyPage());
     }
 
     @Then("Customer is able to apply for a position with next data:$examplesTable")

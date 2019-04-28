@@ -1,15 +1,16 @@
 package bddtests.common.pages;
 
+import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-@DefaultUrl("https://hexad.de/en/home.html")
+@DefaultUrl("https://hexad.de/home.html")
 public class MainPage {
 
-    WebDriver webDriver;
+    private WebDriver webDriver;
 
     public MainPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -18,9 +19,6 @@ public class MainPage {
 
     @FindBy(id = "header")
     private WebElement header;
-
-    @FindBy(tagName ="li")
-    private WebElement careerLink;
 
     public boolean verifyIfMainPageOpened() {
         return header.isDisplayed();
@@ -31,6 +29,6 @@ public class MainPage {
     }
 
     public void pressMyCareerLink() {
-        careerLink.click();
+        webDriver.findElement(By.partialLinkText("Karriere")).click();
     }
 }
