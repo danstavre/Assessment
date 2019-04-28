@@ -1,38 +1,49 @@
 package bddtests.common.pages;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
+import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.DefaultUrl;
+import net.thucydides.core.pages.components.FileToUpload;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-@DefaultUrl("https://hexad.de/en/home.html")
-public class CareersApplyPage {
+import java.nio.file.Paths;
 
-    @FindBy(xpath = "//*[@id=\"Title\"]")
+@DefaultUrl("https://hexad.de/careers-apply.html")
+public class CareersApplyPage extends PageObject {
+
+    public CareersApplyPage(WebDriver webDriver) {
+        super(webDriver);
+        PageFactory.initElements(webDriver, this);
+    }
+
+    @FindBy(id="Title")
     private WebElement titleField;
 
-    @FindBy(xpath = "//*[@id=\"Full Name\"]")
+    @FindBy(id="Full Name")
     private WebElement fullNameField;
 
-    @FindBy(xpath = "//*[@id=\"Email\"]")
+    @FindBy(id ="Email")
     private WebElement emailField;
 
-    @FindBy(xpath = "//*[@id=\"Address\"]")
+    @FindBy(id = "Address")
     private WebElement addressField;
 
-    @FindBy(xpath = "//*[@id=\"phone\"]")
+    @FindBy(id = "phone")
     private WebElement phoneField;
 
-    @FindBy(xpath = "document.querySelector('#carrerForm > div:nth-child(6) > div > input[type=\"file\"]')")
+    @FindBy(name = "file")
     private WebElement fileUpload;
 
-    @FindBy(xpath = "//*[@id=\"carrerForm\"]/div[7]/div/select")
+    @FindBy(name= "position")
     private WebElement positionField;
 
-    @FindBy(xpath = "//*[@id=\"carrerForm\"]/div[8]/div/select")
+    @FindBy(name= "jobtype")
     private WebElement jobTypeField;
 
-    @FindBy(xpath = "//*[@id=\"carrerForm\"]/div[9]/div/div/label/input")
+    @FindBy(className = "checkbox")
     private WebElement agreeCheckBox;
 
     @FindBy(xpath = "//*[@id=\"carrerForm\"]/div[10]/div/button")
@@ -50,16 +61,15 @@ public class CareersApplyPage {
         emailField.sendKeys(emailFieldValue);
     }
 
+    public void setPhoneField(String phoneFieldValue) {}
+
     public void setAddressField(String addressFieldValue) {
         addressField.sendKeys(addressFieldValue);
     }
 
-    public void setPhoneField(String phoneFieldValue) {
-        phoneField.sendKeys(phoneFieldValue);
-    }
-
     public void uploadResume(String pathToMyResume){
-        fileUpload.sendKeys(pathToMyResume);
+        FileToUpload fileToUpload = new FileToUpload(getDriver(), Paths.get(pathToMyResume).getFileName().toString());
+        fileToUpload.fromLocalMachine().to(fileUpload);
     }
 
     public void selectPositionField(String positionValue) {
@@ -85,4 +95,6 @@ public class CareersApplyPage {
     public boolean verifyCustomerIsOnCareerApplyPage(){
        return submitButton.isDisplayed();
     }
+
+    CareersApplyPage(){}
 }

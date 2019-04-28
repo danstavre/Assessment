@@ -9,10 +9,7 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.jbehave.core.model.ExamplesTable;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Map;
-import java.util.stream.Stream;
 
 import static junit.framework.TestCase.assertTrue;
 
@@ -50,23 +47,17 @@ public class ApplyStepDefinitions extends SerenityStories {
     }
 
     @Then("Customer is able to apply for a position with next data:$examplesTable")
-    public void customerAppliesForAPosition(ExamplesTable examplesTable){
+    public void customerAppliesForAPosition(ExamplesTable examplesTable) {
         Map<String, String> examplesTableRow = examplesTable.getRow(0);
-            careersApplyPage.fillTitleField(examplesTableRow.get("title"));
-            careersApplyPage.fillFullNameField(examplesTableRow.get("fullName"));
-            careersApplyPage.setAddressField(examplesTableRow.get("address"));
-            careersApplyPage.setEmailField(examplesTableRow.get("email"));
-            careersApplyPage.setPhoneField(examplesTableRow.get("phone"));
-            careersApplyPage.selectPositionField(examplesTableRow.get("position"));
-            careersApplyPage.selectJobType(examplesTableRow.get("jobType"));
-            careersApplyPage.uploadResume("/src/test/resources/cv.txt");
-            careersApplyPage.pressOnAgreeCheckBox();
-            careersApplyPage.pressSubmitButton();
+        careersApplyPage.fillTitleField(examplesTableRow.get("title"));
+        careersApplyPage.fillFullNameField(examplesTableRow.get("fullName"));
+        careersApplyPage.setAddressField(examplesTableRow.get("address"));
+        careersApplyPage.setEmailField(examplesTableRow.get("email"));
+        careersApplyPage.setPhoneField(examplesTableRow.get("phone"));
+        careersApplyPage.selectPositionField(examplesTableRow.get("position"));
+        careersApplyPage.selectJobType(examplesTableRow.get("jobType"));
+        careersApplyPage.uploadResume("../resources/cv.txt");
+        careersApplyPage.pressOnAgreeCheckBox();
+        careersApplyPage.pressSubmitButton();
     }
-
-    private Stream<String> load() throws Exception {
-        return Files.lines(Paths.get(ClassLoader.getSystemResource("/src/test/resources/cv.txt").toURI()));
-    }
-
-
 }

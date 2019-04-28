@@ -3,17 +3,12 @@ package bddtests.steps;
 import bddtests.common.pages.CareersPage;
 import bddtests.common.pages.MainPage;
 import net.thucydides.core.annotations.Step;
-import org.openqa.selenium.WebDriver;
 
 import static bddtests.common.DriverSetUp.getDriver;
 
 public class ApplyStep {
 
     private static final String URL = "https://hexad.de/home.html";
-
-    WebDriver driver;
-
-    public CareersPage careersPage;
 
     public MainPage mainPage;
 
@@ -35,7 +30,7 @@ public class ApplyStep {
 
     @Step
     public boolean verifyCareersPageIsOpen(){
-        return careersPage.verifyCareersApplyButtonIsPresent();
+        return new CareersPage(getDriver()).verifyCareersApplyButtonIsPresent();
     }
 
     @Step("Click on apply button")

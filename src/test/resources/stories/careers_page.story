@@ -11,5 +11,5 @@ And Customer navigates to Careers page
 When Customer clicks on 'Apply now' for a position
 Then Customer is redirected to an 'Careers Apply' page
 And Customer is able to apply for a position with next data:
-|title   |fullName    |        address          |           email    | phone              |   position     |    jobType |
-|  Mr.   |  Test      | Wolfsburg , Germany     |  test@gmail.com    |  456789000         |   UI Developer | Part-Time  |
+|title   |fullName    |        address          |           email    |     phone          |   position     |    jobType |
+|  Mr.   |  Test      | Wolfsburg , Germany     |  test@gmail.com    |  +49123455678      |   UI Developer | Part-Time  |

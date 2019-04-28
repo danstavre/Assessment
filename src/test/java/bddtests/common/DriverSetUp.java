@@ -2,6 +2,7 @@ package bddtests.common;
 
 import org.jbehave.core.annotations.AfterStories;
 import org.jbehave.core.annotations.BeforeStories;
+import org.junit.After;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -28,14 +29,18 @@ public class DriverSetUp {
         try {
             setDriver();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
+    }
+
+    @After
+    public void cleanup() {
+        getDriver().manage().deleteAllCookies();
     }
 
     @AfterStories
     public void tearDown() {
         System.out.println("Closing browser. ");
-        getDriver().manage().deleteAllCookies();
         getDriver().quit();
     }
 }
